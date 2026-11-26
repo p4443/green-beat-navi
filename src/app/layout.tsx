@@ -3,20 +3,20 @@ import { SerwistProvider } from "@serwist/next/react";
 import { LiveAnnouncement } from "@/components/live-announcement";
 import { OperationsProvider } from "@/components/operations-provider";
 import { EngagementProvider } from "@/components/engagement-provider";
+import { appConfig } from "@/data/app";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "GREEN BEAT NAVI",
-    template: "%s | GREEN BEAT NAVI",
+    default: appConfig.appName,
+    template: `%s | ${appConfig.appName}`,
   },
-  description:
-    "森林公園駅から緑道へ。音楽、地元の食、楽器体験をめぐる地域フェスティバル公式ナビ。",
-  applicationName: "GREEN BEAT NAVI",
+  description: appConfig.metaDescription,
+  applicationName: appConfig.appName,
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "GREEN BEAT",
+    title: appConfig.appShortName,
   },
   formatDetection: {
     telephone: false,
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#092d20",
+  themeColor: appConfig.themeColor,
   colorScheme: "light",
 };
 

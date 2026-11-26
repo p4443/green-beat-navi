@@ -1,26 +1,35 @@
 import Link from "next/link";
 import styles from "./page.module.css";
+import { appConfig } from "@/data/app";
 import { eventSummary, featuredPrograms, navigationItems } from "@/data/event";
+
+const brandSuffix =
+  appConfig.appName.replace(appConfig.appShortName, "").trim() ||
+  appConfig.appName;
 
 export default function Home() {
   return (
     <main>
       <header className={styles.hero}>
         <nav className={styles.nav} aria-label="メインナビゲーション">
-          <a className={styles.brand} href="#top" aria-label="GREEN BEAT NAVI トップ">
+          <a
+            className={styles.brand}
+            href="#top"
+            aria-label={`${appConfig.appName} トップ`}
+          >
             <span className={styles.brandMark} aria-hidden="true">
-              G
+              {appConfig.appName.charAt(0)}
             </span>
             <span>
-              <strong>GREEN BEAT</strong>
-              <small>NAVI</small>
+              <strong>{appConfig.appShortName}</strong>
+              <small>{brandSuffix}</small>
             </span>
           </a>
           <span className={styles.prototype}>2027 PREVIEW</span>
         </nav>
 
         <div className={styles.heroContent} id="top">
-          <p className={styles.eyebrow}>NAMÉGAWA GREEN BEAT 2027</p>
+          <p className={styles.eyebrow}>{appConfig.eventName}</p>
           <h1>
             森へ向かう道が、
             <br />
@@ -121,7 +130,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <div>
-          <strong>GREEN BEAT NAVI</strong>
+          <strong>{appConfig.appName}</strong>
           <p>音楽と緑で、まちを歩こう。</p>
         </div>
         <a href="/admin">運営デモ ↗</a>

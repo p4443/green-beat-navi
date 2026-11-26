@@ -1,5 +1,20 @@
 {
-  "_readme": "このファイルを編集すると、アプリの開催概要・見どころ・タイムテーブル・スポット位置・コース・スタンプ地点(QR連動)を変更できます。編集方法は docs/CONTENT_GUIDE.md を参照してください。id は印刷済みQRと連動するため変更しないでください。",
+  "_readme": "このファイルを編集すると、アプリのアプリ名・テーマ色・開催概要・見どころ・タイムテーブル・スポット位置・コース・スタンプ地点(QR連動)を変更できます。編集方法は docs/CONTENT_GUIDE.md を参照してください。id は印刷済みQRと連動するため変更しないでください。",
+  "app": {
+    "appName": "GREEN BEAT NAVI",
+    "appShortName": "GREEN BEAT",
+    "appDescription": "音楽、地元の食、楽器体験をめぐる地域フェスティバル公式ナビ",
+    "metaDescription": "森林公園駅から緑道へ。音楽、地元の食、楽器体験をめぐる地域フェスティバル公式ナビ。",
+    "eventName": "NAMÉGAWA GREEN BEAT 2027",
+    "themeColor": "#092d20",
+    "backgroundColor": "#f7f6ef",
+    "challengeName": "GREENWAY CHALLENGE",
+    "distanceLabel": "約5.8km",
+    "courseDescription": "森林公園駅北口を出発し、森林公園南口ゲートで折り返して駅へ戻る約5.8kmの巡回コースです。",
+    "couponCode": "GREENBEAT-2027",
+    "eventStartsAt": null,
+    "eventEndsAt": null
+  },
   "eventSummary": {
     "dateLabel": "2027年 春／秋・調整中",
     "areaLabel": "森林公園駅北口発着・南口折返し",

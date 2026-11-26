@@ -3,6 +3,7 @@ import { ConnectivityBanner } from "@/components/connectivity-banner";
 import { MapView } from "@/components/map-view";
 import { eventSpots } from "@/data/spots";
 import shell from "../app-shell.module.css";
+import { appConfig } from "@/data/app";
 
 export const metadata = {
   title: "会場マップ",
@@ -15,12 +16,12 @@ export default function MapPage() {
       <header className={shell.header}>
         <div className={shell.headerInner}>
           <div className={shell.topline}>
-            <span className={shell.brand}>GREEN BEAT NAVI</span>
+            <span className={shell.brand}>{appConfig.appName}</span>
             <span className={shell.demo}>DEMO MODE</span>
           </div>
           <h1>会場マップ</h1>
           <p>
-            森林公園駅北口を出発し、森林公園南口ゲートで折り返して駅へ戻る約5.8kmの巡回コースです。
+            {appConfig.courseDescription}
           </p>
         </div>
       </header>

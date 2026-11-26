@@ -1,15 +1,15 @@
 import type { MetadataRoute } from "next";
+import { appConfig } from "@/data/app";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "GREEN BEAT NAVI",
-    short_name: "GREEN BEAT",
-    description:
-      "音楽、地元の食、楽器体験をめぐる地域フェスティバル公式ナビ",
+    name: appConfig.appName,
+    short_name: appConfig.appShortName,
+    description: appConfig.appDescription,
     start_url: "/",
     display: "standalone",
-    background_color: "#f7f6ef",
-    theme_color: "#092d20",
+    background_color: appConfig.backgroundColor,
+    theme_color: appConfig.themeColor,
     lang: "ja",
     icons: [
       {

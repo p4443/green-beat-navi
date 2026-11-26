@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { stampCheckpoints } from "@/data/engagement";
+import { appConfig } from "@/data/app";
 import { useEngagement } from "./engagement-provider";
 import styles from "./stamp-dashboard.module.css";
 
@@ -33,9 +34,9 @@ export function StampDashboard() {
     <main className={styles.page}>
       <header className={styles.header}>
         <div>
-          <span>GREENWAY CHALLENGE</span>
+          <span>{appConfig.challengeName}</span>
           <h1>
-            往復5.8km
+            往復{appConfig.distanceLabel}
             <br />
             デジタルスタンプ
           </h1>
@@ -101,14 +102,16 @@ export function StampDashboard() {
       <section className={styles.coupon} aria-labelledby="coupon-title">
         <span>COMPLETE REWARD</span>
         <h2 id="coupon-title">
-          {isComplete ? "達成クーポン獲得！" : "4地点達成でクーポン解放"}
+          {isComplete
+            ? "達成クーポン獲得！"
+            : `${stampCheckpoints.length}地点達成でクーポン解放`}
         </h2>
         <p>
           {isComplete
             ? "協力店舗で画面を提示してください。"
             : `あと${stampCheckpoints.length - state.stampIds.length}地点です。`}
         </p>
-        {isComplete && <code>GREENBEAT-2027</code>}
+        {isComplete && <code>{appConfig.couponCode}</code>}
       </section>
 
       <section

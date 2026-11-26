@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { useEngagement } from "./engagement-provider";
+import { appConfig } from "@/data/app";
 import { stampCheckpoints } from "@/data/engagement";
 import styles from "./join-experience.module.css";
 
@@ -67,17 +68,18 @@ export function JoinExperience() {
   return (
     <main className={styles.page}>
       <section className={styles.card}>
-        <span>GREENWAY CHALLENGE</span>
+        <span>{appConfig.challengeName}</span>
         <h1>無料で参加する</h1>
         <p className={styles.lead}>
           森林公園駅北口から南口を往復し、{stampCheckpoints.length}
-          つのデジタルスタンプを集める約5.8kmのチャレンジです。
+          つのデジタルスタンプを集める{appConfig.distanceLabel}
+          のチャレンジです。
         </p>
 
         <dl className={styles.summary}>
           <div>
             <dt>距離</dt>
-            <dd>往復 約5.8km</dd>
+            <dd>往復 {appConfig.distanceLabel}</dd>
           </div>
           <div>
             <dt>チェックポイント</dt>

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { appConfig } from "./app";
 import { stampCheckpoints } from "./engagement";
 import { eventSummary, featuredPrograms } from "./event";
 import { scheduleItems } from "./schedule";
@@ -12,6 +13,52 @@ const TIME_PATTERN = /^\d{2}:\d{2}$/;
 // 日本国内の妥当な座標範囲(編集時の桁間違い・緯度経度の取り違えを検出)
 const isJapanLatitude = (value: number) => value >= 20 && value <= 46;
 const isJapanLongitude = (value: number) => value >= 122 && value <= 154;
+
+describe("content.json: アプリ設定(app)", () => {
+  it("名称・説明がすべて入力されている", () => {
+    const requiredKeys = [
+      "appName",
+      "appShortName",
+      "appDescription",
+      "metaDescription",
+      "eventName",
+      "challengeName",
+      "distanceLabel",
+      "courseDescription",
+      "couponCode",
+    ] as const;
+    for (const key of requiredKeys) {
+      expect(appConfig[key].trim(), `app.${key} が空です`).not.toBe("");
+    }
+  });
+
+  it("テーマ色は #RRGGBB 形式", () => {
+    expect(
+      appConfig.themeColor,
+      "app.themeColor は #092d20 のような形式で入力してください",
+    ).toMatch(/^#[0-9a-fA-F]{6}$/);
+    expect(appConfig.backgroundColor).toMatch(/^#[0-9a-fA-F]{6}$/);
+  });
+
+  it("開催日時は null または正しい日時で、開始が終了より前", () => {
+    for (const key of ["eventStartsAt", "eventEndsAt"] as const) {
+      const value = appConfig[key];
+      if (value !== null) {
+        expect(
+          Number.isNaN(Date.parse(value)),
+          `app.${key}: 「2027-04-18T09:30:00+09:00」のような形式で入力してください`,
+        ).toBe(false);
+      }
+    }
+    if (appConfig.eventStartsAt && appConfig.eventEndsAt) {
+      expect(
+        Date.parse(appConfig.eventStartsAt) <
+          Date.parse(appConfig.eventEndsAt),
+        "開催開始日時が終了日時より前になっていません",
+      ).toBe(true);
+    }
+  });
+});
 
 describe("content.json: 開催概要", () => {
   it("すべての項目が入力されている", () => {

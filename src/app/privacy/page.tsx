@@ -1,5 +1,6 @@
 import Link from "next/link";
 import shell from "../app-shell.module.css";
+import { appConfig } from "@/data/app";
 import { stampCheckpoints } from "@/data/engagement";
 
 export const metadata = {
@@ -13,7 +14,7 @@ export default function PrivacyPage() {
     <main className={shell.page}>
       <header className={shell.header}>
         <div className={shell.headerInner}>
-          <span className={shell.brand}>GREEN BEAT NAVI</span>
+          <span className={shell.brand}>{appConfig.appName}</span>
           <h1>プライバシーノーティス</h1>
           <p>
             本アプリは、氏名・電話番号・メールアドレスなどの個人情報を収集しない設計です。

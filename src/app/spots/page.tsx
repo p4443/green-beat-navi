@@ -2,6 +2,7 @@ import { AppNav } from "@/components/app-nav";
 import { ConnectivityBanner } from "@/components/connectivity-banner";
 import { LiveSpots } from "@/components/live-spots";
 import shell from "../app-shell.module.css";
+import { appConfig } from "@/data/app";
 
 export const metadata = {
   title: "スポット一覧",
@@ -14,7 +15,7 @@ export default function SpotsPage() {
       <header className={shell.header}>
         <div className={shell.headerInner}>
           <div className={shell.topline}>
-            <span className={shell.brand}>GREEN BEAT NAVI</span>
+            <span className={shell.brand}>{appConfig.appName}</span>
             <span className={shell.demo}>DEMO MODE</span>
           </div>
           <h1>スポット</h1>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { stampCheckpoints } from "@/data/engagement";
+import { appConfig } from "@/data/app";
 import { useEngagement } from "./engagement-provider";
 import styles from "./checkin-card.module.css";
 
@@ -25,8 +26,8 @@ export function CheckinCard({ checkpointId }: { checkpointId: string }) {
     return (
       <main className={styles.page}>
         <section className={styles.card}>
-          <span>JOIN GREENWAY CHALLENGE</span>
-          <div className={styles.mark}>G</div>
+          <span>{`JOIN ${appConfig.challengeName}`}</span>
+          <div className={styles.mark}>{appConfig.appName.charAt(0)}</div>
           <h1>参加開始が必要です</h1>
           <p>
             企画と注意事項を確認してから、デジタルスタンプラリーを開始してください。
