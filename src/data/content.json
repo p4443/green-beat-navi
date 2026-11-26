@@ -1,5 +1,5 @@
 {
-  "_readme": "このファイルを編集すると、アプリの開催概要・見どころ・タイムテーブル・スポット位置・コースを変更できます。編集方法は docs/CONTENT_GUIDE.md を参照してください。id は変更しないでください。",
+  "_readme": "このファイルを編集すると、アプリの開催概要・見どころ・タイムテーブル・スポット位置・コース・スタンプ地点(QR連動)を変更できます。編集方法は docs/CONTENT_GUIDE.md を参照してください。id は印刷済みQRと連動するため変更しないでください。",
   "eventSummary": {
     "dateLabel": "2027年 春／秋・調整中",
     "areaLabel": "森林公園駅北口発着・南口折返し",
@@ -223,6 +223,36 @@
       "status": "open",
       "statusLabel": "ゴール地点",
       "coordinateStatus": "verified"
+    }
+  ],
+  "stampCheckpoints": [
+    {
+      "id": "station-start",
+      "order": 1,
+      "name": "森林公園駅 北口",
+      "role": "START",
+      "description": "北口ロータリーからプロムナードへ出発"
+    },
+    {
+      "id": "greenway-cafe",
+      "order": 2,
+      "name": "GREENWAY CAFÉ",
+      "role": "GREENWAY",
+      "description": "緑道の音楽と地域の味を体験"
+    },
+    {
+      "id": "south-gate-turn",
+      "order": 3,
+      "name": "森林公園 南口",
+      "role": "TURN",
+      "description": "約2.9km地点で復路へ折り返し"
+    },
+    {
+      "id": "station-goal",
+      "order": 4,
+      "name": "森林公園駅 北口",
+      "role": "GOAL",
+      "description": "往復約5.8kmを歩いてゴール"
     }
   ]
 }

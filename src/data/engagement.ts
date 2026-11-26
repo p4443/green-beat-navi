@@ -1,3 +1,5 @@
+import content from "./content.json";
+
 export type NotificationPreference = "unknown" | "enabled" | "denied";
 
 export type EngagementState = {
@@ -28,36 +30,18 @@ export type EngagementAction =
 
 export const engagementStorageKey = "green-beat-demo-engagement-v1";
 
-export const stampCheckpoints = [
-  {
-    id: "station-start",
-    order: 1,
-    name: "森林公園駅 北口",
-    role: "START",
-    description: "北口ロータリーからプロムナードへ出発",
-  },
-  {
-    id: "greenway-cafe",
-    order: 2,
-    name: "GREENWAY CAFÉ",
-    role: "GREENWAY",
-    description: "緑道の音楽と地域の味を体験",
-  },
-  {
-    id: "south-gate-turn",
-    order: 3,
-    name: "森林公園 南口",
-    role: "TURN",
-    description: "約2.9km地点で復路へ折り返し",
-  },
-  {
-    id: "station-goal",
-    order: 4,
-    name: "森林公園駅 北口",
-    role: "GOAL",
-    description: "往復約5.8kmを歩いてゴール",
-  },
-] as const;
+export type StampCheckpoint = {
+  id: string;
+  order: number;
+  name: string;
+  role: string;
+  description: string;
+};
+
+// スタンプ地点(QR連動)の編集は src/data/content.json で行う
+// (docs/CONTENT_GUIDE.md 2-5章参照)。先頭の地点が参加開始時に自動付与される。
+export const stampCheckpoints: StampCheckpoint[] =
+  content.stampCheckpoints as StampCheckpoint[];
 
 export function createInitialEngagementState(): EngagementState {
   return {

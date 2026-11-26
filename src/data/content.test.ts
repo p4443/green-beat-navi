@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { stampCheckpoints } from "./engagement";
 import { eventSummary, featuredPrograms } from "./event";
 import { scheduleItems } from "./schedule";
 import { demoMapCenter, eventSpots, greenwayRoute } from "./spots";
@@ -97,6 +98,43 @@ describe("content.json: スポット(eventSpots)", () => {
       expect(["verified", "provisional"]).toContain(spot.coordinateStatus);
       expect(spot.name.trim()).not.toBe("");
       expect(spot.description.trim()).not.toBe("");
+    }
+  });
+});
+
+describe("content.json: スタンプ地点(stampCheckpoints)", () => {
+  it("id が重複せず、URLに使える形式(半角英数とハイフン)", () => {
+    const ids = stampCheckpoints.map((checkpoint) => checkpoint.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const checkpoint of stampCheckpoints) {
+      expect(
+        /^[a-z0-9-]+$/.test(checkpoint.id),
+        `${checkpoint.id}: id は半角小文字英数とハイフンのみ使用できます(QRのURLになります)`,
+      ).toBe(true);
+    }
+  });
+
+  it("2地点以上あり、order が 1 から通し番号になっている", () => {
+    expect(
+      stampCheckpoints.length,
+      "スタンプ地点は最低2地点(スタートとゴール)必要です",
+    ).toBeGreaterThanOrEqual(2);
+    stampCheckpoints.forEach((checkpoint, index) => {
+      expect(
+        checkpoint.order,
+        `${checkpoint.id}: order は上から ${index + 1} になるよう通し番号を振り直してください`,
+      ).toBe(index + 1);
+    });
+  });
+
+  it("表示文言が入力されている", () => {
+    for (const checkpoint of stampCheckpoints) {
+      expect(checkpoint.name.trim(), `${checkpoint.id} の name`).not.toBe("");
+      expect(checkpoint.role.trim(), `${checkpoint.id} の role`).not.toBe("");
+      expect(
+        checkpoint.description.trim(),
+        `${checkpoint.id} の description`,
+      ).not.toBe("");
     }
   });
 });
