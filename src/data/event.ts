@@ -1,3 +1,5 @@
+import content from "./content.json";
+
 export type NavigationItem = {
   label: string;
   description: string;
@@ -14,13 +16,19 @@ export type FeaturedProgram = {
   description: string;
 };
 
-export const eventSummary = {
-  dateLabel: "2027年 春／秋・調整中",
-  areaLabel: "森林公園駅北口発着・南口折返し",
-  admissionLabel: "入場無料（予定）",
-  organizer: "埼玉県森林公園緑道",
-  designatedManager: "一般社団法人埼玉県造園業協会",
-} as const;
+export type EventSummary = {
+  dateLabel: string;
+  areaLabel: string;
+  admissionLabel: string;
+  organizer: string;
+  designatedManager: string;
+};
+
+// 開催概要・見どころの編集は src/data/content.json で行う(docs/CONTENT_GUIDE.md 参照)
+export const eventSummary: EventSummary = content.eventSummary;
+
+export const featuredPrograms: FeaturedProgram[] =
+  content.featuredPrograms as FeaturedProgram[];
 
 export const navigationItems: NavigationItem[] = [
   {
@@ -49,30 +57,3 @@ export const navigationItems: NavigationItem[] = [
   },
 ];
 
-export const featuredPrograms: FeaturedProgram[] = [
-  {
-    id: "morning-green",
-    time: "09:30",
-    area: "緑道・木陰エリア",
-    category: "MUSIC",
-    title: "Morning Green Session",
-    description: "珈琲とパンを片手に楽しむ、サックス四重奏の朝のステージ。",
-  },
-  {
-    id: "instrument-experience",
-    time: "11:30",
-    area: "体験エリア",
-    category: "EXPERIENCE",
-    title: "はじめての楽器体験",
-    description: "子どもから大人まで参加できる、音を出す楽しさに出会う体験。",
-  },
-  {
-    id: "finale",
-    time: "15:30",
-    area: "メインステージ",
-    category: "MUSIC",
-    title: "GREEN BEAT 100 Grand Ensemble",
-    description:
-      "ブラス、サックス、地域の吹奏楽部、一般参加者が一緒につくる大合奏。",
-  },
-];

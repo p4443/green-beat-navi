@@ -44,6 +44,7 @@ docker run --rm -v "$PWD":/app -w /app node:lts-alpine npm run build
 - [総合企画・運営仕様書](./docs/OPERATIONS_SPEC.md)(GBN-OPS-001)
 - [操作マニュアル](./docs/USER_MANUAL.md)(GBN-MAN-001)
 - [セキュリティ・個人情報管理・無人自動更新 設計書](./docs/SECURITY_AUTOMATION_SPEC.md)(GBN-SEC-001)
+- [コンテンツ編集ガイド](./docs/CONTENT_GUIDE.md)(GBN-CNT-001)
 
 ## Gitフック(GitKraken対応の自動チェック)
 
@@ -59,4 +60,6 @@ git config core.hooksPath .githooks
 
 ## データ編集
 
-仮の開催概要とプログラムは `src/data/event.ts` に集約しています。本番情報が確定するまで、未確認の日時や座標を確定情報として掲載しないでください。
+開催概要・見どころ・タイムテーブル(演奏曲)・スポット位置・コースは `src/data/content.json` に集約しています。編集方法は[コンテンツ編集ガイド](./docs/CONTENT_GUIDE.md)を参照してください。編集ミスはコミット時の自動チェックと CI が検出します。
+
+本番情報が確定するまで、未確認の日時や座標を確定情報として掲載しないでください。
