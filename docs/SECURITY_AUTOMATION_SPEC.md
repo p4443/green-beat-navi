@@ -264,9 +264,27 @@ Dockerベースイメージ(`node:lts-alpine`)のdigest更新もRenovateが追�
 | フェーズ | 内容 | 状態 |
 | :--- | :--- | :--- |
 | Phase 0 | セキュリティヘッダー+CSP Report-Only、Renovate、CI品質ゲート、秘密情報スキャン(本書9章) | **実施済み** |
-| Phase 1(本番化着手時) | GitHubリポジトリ化+ブランチ保護、CDN/TLS/WAF、自動デプロイ、管理画面認証(3-3)、サーバー永続化 | 未着手 |
+| Phase 1(本番化着手時) | GitHubリポジトリ化(済:下記8-1)+ブランチ保護、Renovate App導入、CDN/TLS/WAF、自動デプロイ、管理画面認証(3-3)、サーバー永続化 | 一部実施 |
 | Phase 2(開催前) | 署名付きQR(3-4)、監査ログ(5-2)、プライバシーノーティス(4-3)、CSP本適用、負荷・復旧試験 | 未着手 |
 | Phase 3(開催後) | 保持期間超過データの自動削除確認、インシデント振り返り、本書改訂 | 未着手 |
+
+### 8-1. リポジトリ所有とクライアント引き渡し設計
+
+**現状**:`p4443/green-beat-navi`(private)で開発する。GitHub仕様によりOrganizationの新規作成はWeb UIのみのため、暫定的に個人アカウント配下へ置く。
+
+**引き渡し方針**:納品先の専用Organization(例:`green-beat-navi-project`)へ **リポジトリTransfer** で移管する。Transferはコミット履歴・Issue・PR・Actions設定・Webhookを無損失で引き継ぎ、旧URLは自動リダイレクトされる。
+
+**引き渡し手順(所要15分程度)**
+
+1. クライアント側(または受託者が代理で)Organizationを作成し、クライアント担当者をOwnerに追加する(2名以上)。
+2. `p4443/green-beat-navi` → Settings → Transfer ownership で移管する。
+3. 移管先でRenovate Appと必要な外部連携(Vercel/Cloudflare等)を再認可する。
+4. シークレット(QR署名鍵・OAuthクライアント等)はTransfer対象外のため、移管先のEnvironmentsへ再登録し、旧鍵は失効させる。
+5. ブランチ保護(mainへの直push禁止、CI必須チェック)を移管先で再確認する。
+6. 引き継ぎ完了後、`p4443` のOwner権限を外し、必要に応じてコラボレーターとして残す。
+
+**注意**:コミット履歴の作者名(p4443)は移管後も残るが、これは通常の受託開発と同様であり問題ない。秘密情報が履歴に含まれないことはCIのgitleaksで常時担保する。
+
 
 ---
 
@@ -280,7 +298,7 @@ Dockerベースイメージ(`node:lts-alpine`)のdigest更新もRenovateが追�
 | 既知脆弱性の解消 | `package-lock.json` | `npm audit fix` により12件(high 4件)→0件。lint/typecheck/test/buildの回帰なしを確認 |
 | ローカル自動チェック | `.githooks/` | pre-commit(lint+typecheck)、pre-push(test)をDocker経由で実行。GitKraken(v7.7.2+)・CLI共通。`git config core.hooksPath .githooks` で有効化 |
 
-> 注意:Renovate・CIはGitHubリポジトリとして公開(またはプライベート登録)した時点から有効になります。現状はローカルフォルダのため、Phase 1の初手として `git init` とGitHub登録を行ってください。
+> 注意:GitHub登録は実施済み(`p4443/green-beat-navi`、private)。CIはpush時に自動実行される。Renovateの無人更新を開始するには、リポジトリへ [Renovate App](https://github.com/apps/renovate) をインストールすること(無料・1分)。リポジトリの所有と引き渡しは8-1章を参照。
 
 ---
 
