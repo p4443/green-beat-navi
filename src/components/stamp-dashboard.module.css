@@ -1,0 +1,308 @@
+.page {
+  min-height: 100svh;
+  padding: 32px max(20px, calc((100% - 1100px) / 2)) 120px;
+  background: #edf0e8;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 38px;
+  border-radius: 20px;
+  color: #f7f3e8;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(216, 236, 107, 0.2), transparent 30%),
+    #092d20;
+}
+
+.header span,
+.coupon > span,
+.notification span {
+  color: #d8ec6b;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.header h1 {
+  margin-top: 12px;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: clamp(36px, 7vw, 64px);
+  font-weight: 500;
+  line-height: 1.16;
+}
+
+.header p {
+  margin-top: 14px;
+  color: rgba(247, 243, 232, 0.7);
+}
+
+.progress strong {
+  color: #d8ec6b;
+  font-family: Georgia, serif;
+  font-size: 70px;
+}
+
+.progress span {
+  display: block;
+  margin-top: 4px;
+}
+
+.error {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  color: #fff;
+  background: #a93227;
+  font-size: 12px;
+}
+
+.joinPrompt {
+  margin-top: 26px;
+  padding: 32px;
+  border: 1px solid #cbd4c3;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.joinPrompt span {
+  color: #52753c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.joinPrompt h2 {
+  margin-top: 8px;
+  color: #12392a;
+  font-size: 26px;
+}
+
+.joinPrompt p {
+  margin-top: 10px;
+  color: #687269;
+  line-height: 1.7;
+}
+
+.joinPrompt a {
+  min-height: 48px;
+  margin-top: 22px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 22px;
+  border-radius: 8px;
+  color: #092d20;
+  background: #d8ec6b;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.participantId {
+  margin-top: 18px;
+  color: #687269;
+  font-size: 12px;
+  text-align: right;
+}
+
+.participantId strong {
+  color: #315b45;
+  letter-spacing: 0.08em;
+}
+
+.stampGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.stampGrid article {
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid #d5dccf;
+  border-radius: 14px;
+  background: #fff;
+  text-align: center;
+}
+
+.stampGrid article.collected {
+  border-color: #70924f;
+  background: #f5f8ee;
+}
+
+.order {
+  align-self: flex-start;
+  color: #8a948c;
+  font-family: Georgia, serif;
+  font-size: 13px;
+}
+
+.stampMark {
+  width: 82px;
+  height: 82px;
+  margin: 18px 0;
+  display: grid;
+  place-items: center;
+  border: 2px dashed #93a08f;
+  border-radius: 50%;
+  color: #8b968b;
+  font-family: Georgia, serif;
+  font-size: 32px;
+}
+
+.collected .stampMark {
+  border-style: solid;
+  border-color: #52753c;
+  color: #fff;
+  background: #52753c;
+}
+
+.stampGrid small {
+  color: #52753c;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.stampGrid h2 {
+  margin-top: 6px;
+  color: #12392a;
+  font-size: 17px;
+}
+
+.stampGrid p {
+  flex: 1;
+  margin-top: 9px;
+  color: #707a72;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.stampGrid button,
+.notification button {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 7px;
+  color: #092d20;
+  background: #d8ec6b;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.stampGrid button:disabled {
+  color: #fff;
+  background: #52753c;
+  cursor: default;
+}
+
+.coupon,
+.notification {
+  margin-top: 26px;
+  padding: 30px;
+  border-radius: 16px;
+}
+
+.coupon {
+  color: #f7f3e8;
+  background: #173d2d;
+}
+
+.coupon h2,
+.notification h2 {
+  margin-top: 7px;
+  font-size: 24px;
+}
+
+.coupon p,
+.notification p {
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.coupon code {
+  margin-top: 18px;
+  display: inline-block;
+  padding: 12px 16px;
+  border: 1px dashed #d8ec6b;
+  border-radius: 6px;
+  color: #d8ec6b;
+  font-size: 18px;
+}
+
+.notification {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid #d5dccf;
+  background: #fff;
+}
+
+.notification span {
+  color: #52753c;
+}
+
+.notification h2 {
+  color: #12392a;
+}
+
+.notification p {
+  color: #707a72;
+}
+
+.notificationMessage {
+  grid-column: 1 / -1;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.actions a {
+  padding: 12px 16px;
+  border: 1px solid #b9c3b0;
+  border-radius: 8px;
+  color: #315b45;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: 14px 14px 110px;
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 26px;
+  }
+
+  .progress strong {
+    font-size: 48px;
+  }
+
+  .stampGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stampGrid article {
+    min-height: 310px;
+    padding: 16px;
+  }
+
+  .notification {
+    grid-template-columns: 1fr;
+  }
+}

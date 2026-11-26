@@ -1,0 +1,48 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "無人依存更新設定。CI(lint/typecheck/test/build)成功時のみ自動マージする。docs/SECURITY_AUTOMATION_SPEC.md 6章参照。",
+  "extends": [
+    "config:recommended",
+    ":timezone(Asia/Tokyo)",
+    ":semanticCommitsDisabled"
+  ],
+  "schedule": ["* 0-6 * * *"],
+  "labels": ["dependencies"],
+  "rangeStrategy": "bump",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true,
+    "schedule": ["* 0-6 * * 1"]
+  },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "automerge": true,
+    "schedule": ["at any time"],
+    "prPriority": 10
+  },
+  "osvVulnerabilityAlerts": true,
+  "packageRules": [
+    {
+      "description": "patch/minor はCI成功を条件に無人マージ",
+      "matchUpdateTypes": ["patch", "minor", "pin", "digest"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    },
+    {
+      "description": "フレームワーク本体のmajorは互換性確認が必要なため人の承認を残す",
+      "matchPackageNames": ["next", "react", "react-dom", "eslint-config-next"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "Dockerベースイメージ(node:lts-alpine)のdigest更新も無人マージ",
+      "matchDatasources": ["docker"],
+      "automerge": true
+    }
+  ],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 0,
+  "dependencyDashboard": true
+}

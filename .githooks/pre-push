@@ -1,0 +1,25 @@
+#!/bin/sh
+# プッシュ前の自動チェック(GitKraken・CLI 共通)
+# ホストに Node.js は不要。Docker でテストを実行する。
+# 緊急時のスキップ: GBN_SKIP_CHECKS=1 を設定するか `git push --no-verify`
+set -e
+
+if [ "$GBN_SKIP_CHECKS" = "1" ]; then
+  echo "[pre-push] GBN_SKIP_CHECKS=1 のためチェックをスキップします"
+  exit 0
+fi
+
+export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
+
+if ! command -v docker >/dev/null 2>&1; then
+  echo "[pre-push] docker が見つかりません。Docker Desktop を起動してください" >&2
+  exit 1
+fi
+
+REPO_DIR="$(git rev-parse --show-toplevel)"
+
+echo "[pre-push] テストを実行中 (Docker)..."
+docker run --rm -v "$REPO_DIR":/app -w /app -e NEXT_TELEMETRY_DISABLED=1 \
+  node:lts-alpine npm test
+
+echo "[pre-push] OK"

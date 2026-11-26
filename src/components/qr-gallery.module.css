@@ -1,0 +1,220 @@
+.page {
+  min-height: 100svh;
+  padding: 36px max(20px, calc((100% - 1100px) / 2)) 80px;
+  background: #edf0e8;
+}
+
+.page header {
+  padding: 34px;
+  border-radius: 18px;
+  color: #f7f3e8;
+  background: #092d20;
+}
+
+.page header span,
+.grid article > span {
+  color: #d8ec6b;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.page h1 {
+  margin-top: 8px;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 42px;
+}
+
+.page header p {
+  margin-top: 10px;
+  color: rgba(247, 243, 232, 0.7);
+}
+
+.page header a {
+  margin-top: 20px;
+  display: inline-block;
+  color: #d8ec6b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.routeGuide {
+  margin-top: 24px;
+  padding: 28px;
+  border: 1px solid #cbd4c3;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.routeGuide > div > span {
+  color: #52753c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.routeGuide h2 {
+  margin-top: 6px;
+  color: #12392a;
+  font-size: 24px;
+}
+
+.routeGuide ol {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  list-style: none;
+}
+
+.routeGuide li {
+  position: relative;
+  min-width: 0;
+  padding: 14px 18px;
+  border-left: 1px solid #d5dccf;
+}
+
+.routeGuide li:first-child {
+  border-left: 0;
+  border-radius: 10px;
+  background: #f2f7d8;
+}
+
+.routeGuide li strong {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #315b45;
+  font-size: 13px;
+}
+
+.routeGuide li > span,
+.routeGuide li b,
+.routeGuide li small {
+  display: block;
+}
+
+.routeGuide li > span {
+  margin-top: 12px;
+  color: #52753c;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.routeGuide li b {
+  margin-top: 4px;
+  color: #12392a;
+  font-size: 13px;
+}
+
+.routeGuide li small {
+  margin-top: 6px;
+  color: #687269;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.grid article {
+  padding: 28px;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.grid article.startCard {
+  grid-column: 1 / -1;
+  border: 3px solid #cadd63;
+  background: #f8fbe8;
+}
+
+.startBadge {
+  margin-bottom: 16px;
+  display: inline-block;
+  padding: 7px 10px;
+  border-radius: 99px;
+  color: #092d20;
+  background: #d8ec6b;
+  font-size: 11px;
+}
+
+.grid article > span {
+  color: #52753c;
+}
+
+.grid h2 {
+  margin-top: 6px;
+  color: #12392a;
+}
+
+.description {
+  margin-top: 8px;
+  color: #687269;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.nextStep {
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #12392a;
+  background: #edf0e8;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.qr {
+  width: fit-content;
+  margin: 24px auto;
+  padding: 14px;
+  background: #fff;
+}
+
+.grid code {
+  display: block;
+  overflow-wrap: anywhere;
+  color: #687269;
+  font-size: 10px;
+}
+
+@media (max-width: 900px) {
+  .routeGuide ol,
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .routeGuide li:nth-child(3) {
+    border-left: 0;
+  }
+}
+
+@media (max-width: 650px) {
+  .page {
+    padding: 14px;
+  }
+
+  .routeGuide ol,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .routeGuide li {
+    border-top: 1px solid #d5dccf;
+    border-left: 0;
+  }
+
+  .routeGuide li:first-child {
+    border-top: 0;
+  }
+}

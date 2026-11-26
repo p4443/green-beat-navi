@@ -1,0 +1,26 @@
+#!/bin/sh
+# コミット前の自動チェック(GitKraken・CLI 共通)
+# ホストに Node.js は不要。Docker で lint と typecheck を実行する。
+# 緊急時のスキップ: GBN_SKIP_CHECKS=1 を設定するか `git commit --no-verify`
+set -e
+
+if [ "$GBN_SKIP_CHECKS" = "1" ]; then
+  echo "[pre-commit] GBN_SKIP_CHECKS=1 のためチェックをスキップします"
+  exit 0
+fi
+
+# GitKraken 等の GUI アプリは PATH が最小構成のため Docker の場所を補完する
+export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
+
+if ! command -v docker >/dev/null 2>&1; then
+  echo "[pre-commit] docker が見つかりません。Docker Desktop を起動してください" >&2
+  exit 1
+fi
+
+REPO_DIR="$(git rev-parse --show-toplevel)"
+
+echo "[pre-commit] lint と typecheck を実行中 (Docker)..."
+docker run --rm -v "$REPO_DIR":/app -w /app -e NEXT_TELEMETRY_DISABLED=1 \
+  node:lts-alpine sh -c "npm run lint && npm run typecheck"
+
+echo "[pre-commit] OK"

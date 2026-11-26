@@ -1,0 +1,77 @@
+.page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #092d20;
+}
+
+.card {
+  width: min(460px, 100%);
+  padding: 42px;
+  border-radius: 20px;
+  color: #12392a;
+  background: #f7f6ef;
+  text-align: center;
+}
+
+.card > span {
+  color: #52753c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.mark {
+  width: 100px;
+  height: 100px;
+  margin: 24px auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #092d20;
+  background: #d8ec6b;
+  font-family: Georgia, serif;
+  font-size: 44px;
+}
+
+.card h1 {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 30px;
+}
+
+.card p {
+  margin-top: 12px;
+  color: #687269;
+  line-height: 1.7;
+}
+
+.card button,
+.card a {
+  min-height: 48px;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 8px;
+  font-weight: 800;
+}
+
+.card button {
+  width: 100%;
+  color: #fff;
+  background: #173d2d;
+  cursor: pointer;
+}
+
+.card button:disabled {
+  background: #52753c;
+}
+
+.card a {
+  margin-top: 10px;
+  color: #315b45;
+  background: #e8ede2;
+  font-size: 12px;
+}

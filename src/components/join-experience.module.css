@@ -1,0 +1,210 @@
+.page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+  background:
+    radial-gradient(circle at 80% 12%, rgba(216, 236, 107, 0.16), transparent 28%),
+    #092d20;
+}
+
+.card {
+  width: min(620px, 100%);
+  padding: clamp(28px, 6vw, 52px);
+  border-radius: 22px;
+  color: #12392a;
+  background: #f7f6ef;
+}
+
+.card > span {
+  color: #52753c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.card h1 {
+  margin-top: 10px;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: clamp(36px, 8vw, 56px);
+  font-weight: 500;
+}
+
+.lead {
+  margin-top: 16px;
+  color: #687269;
+  line-height: 1.8;
+}
+
+.summary {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid #d5dccf;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.summary div {
+  padding: 16px;
+}
+
+.summary div + div {
+  border-left: 1px solid #d5dccf;
+}
+
+.summary dt {
+  color: #718074;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.summary dd {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.notice {
+  margin-top: 18px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #e8ede2;
+}
+
+.notice h3 {
+  font-size: 16px;
+}
+
+.notice ul {
+  margin: 12px 0 0 20px;
+  color: #5f6c62;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.consent {
+  margin-top: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.consent input {
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  accent-color: #315b45;
+}
+
+.card form button,
+.primaryLink,
+.joinButton {
+  min-height: 52px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  background: #173d2d;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.card form button {
+  width: 100%;
+  cursor: pointer;
+}
+
+.joinButton {
+  width: 100%;
+  cursor: pointer;
+}
+
+.card form button:disabled {
+  color: #879189;
+  background: #d8ddd4;
+  cursor: not-allowed;
+}
+
+.confirmation {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #d5dccf;
+}
+
+.confirmation > span {
+  color: #52753c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.confirmation > h2 {
+  margin-top: 7px;
+  font-size: 24px;
+}
+
+.confirmation > p {
+  margin-top: 8px;
+  color: #687269;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.backButton {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: 0;
+  color: #52753c;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.secondaryLink {
+  margin-top: 14px;
+  display: block;
+  color: #52753c;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.participantId {
+  margin-top: 8px;
+  display: block;
+  color: #315b45;
+  font-size: 24px;
+  letter-spacing: 0.08em;
+}
+
+.idLabel {
+  margin-top: 24px;
+  color: #718074;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+@media (max-width: 560px) {
+  .page {
+    align-items: start;
+    padding: 14px;
+  }
+
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .summary div + div {
+    border-top: 1px solid #d5dccf;
+    border-left: 0;
+  }
+}
