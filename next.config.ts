@@ -10,6 +10,7 @@ const withSerwist = withSerwistInit({
     "/schedule",
     "/spots",
     "/stamps",
+    "/privacy",
     "/~offline",
   ].map((url) => ({
     url,

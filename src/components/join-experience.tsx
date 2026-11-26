@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { useEngagement } from "./engagement-provider";
+import { stampCheckpoints } from "@/data/engagement";
 import styles from "./join-experience.module.css";
 
 function createParticipantId() {
@@ -45,7 +46,10 @@ export function JoinExperience() {
           <span>ALREADY JOINED</span>
           <h1>参加受付が完了しました</h1>
           <p className={styles.lead}>
-            この画面が参加確認です。STARTスタンプを取得しました。次は緑道を進み「GREENWAY CAFÉ」を目指してください。
+            この画面が参加確認です。STARTスタンプを取得しました。
+            {stampCheckpoints[1]
+              ? `次は緑道を進み「${stampCheckpoints[1].name}」を目指してください。`
+              : "緑道を進んでチャレンジを続けてください。"}
           </p>
           <p className={styles.idLabel}>参加ID</p>
           <strong className={styles.participantId}>{state.participantId}</strong>
@@ -66,7 +70,8 @@ export function JoinExperience() {
         <span>GREENWAY CHALLENGE</span>
         <h1>無料で参加する</h1>
         <p className={styles.lead}>
-          森林公園駅北口から南口を往復し、4つのデジタルスタンプを集める約5.8kmのチャレンジです。
+          森林公園駅北口から南口を往復し、{stampCheckpoints.length}
+          つのデジタルスタンプを集める約5.8kmのチャレンジです。
         </p>
 
         <dl className={styles.summary}>
@@ -76,7 +81,7 @@ export function JoinExperience() {
           </div>
           <div>
             <dt>チェックポイント</dt>
-            <dd>4地点</dd>
+            <dd>{stampCheckpoints.length}地点</dd>
           </div>
           <div>
             <dt>参加費</dt>
@@ -98,6 +103,9 @@ export function JoinExperience() {
             <h2 id="confirm-title">匿名参加を確認</h2>
             <p>
               個人情報は入力しません。この端末に匿名の参加IDを発行します。
+              詳しくは
+              <Link href="/privacy">プライバシーノーティス</Link>
+              をご覧ください。
             </p>
             <div className={styles.notice}>
               <h3>参加前にご確認ください</h3>
