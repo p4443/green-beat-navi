@@ -70,14 +70,14 @@
 | `Referrer-Policy` | `strict-origin-when-cross-origin` | 参照元情報の漏えい抑制 |
 | `X-Frame-Options` / CSP `frame-ancestors` | `DENY` / `'none'` | クリックジャッキング防止 |
 | `Permissions-Policy` | カメラ・マイク・位置情報等を全拒否 | 不要API悪用の防止 |
-| `Content-Security-Policy-Report-Only` | self + OpenStreetMapタイルのみ許可 | XSS緩和(段階導入中) |
+| `Content-Security-Policy` | self + OpenStreetMapタイルのみ許可 | XSS緩和(**本適用済み**。全10画面の自動巡回で違反ゼロを確認) |
 | `poweredByHeader: false` | — | フレームワーク情報の秘匿 |
 
-**CSP昇格手順(無人化対象外・一度だけ人が判断)**
+**CSP昇格手順(実施済み・2026年11月27日)**
 
-1. Report-Onlyのまま全画面を実機で巡回し、違反レポートがないことを確認する。
-2. `Content-Security-Policy-Report-Only` を `Content-Security-Policy` へ変更する。
-3. 将来インライン排除が完了したら `'unsafe-inline'` をnonce方式へ置換する。
+1. ~~Report-Onlyのまま全画面を巡回し、違反レポートがないことを確認する~~ → 全10画面の自動巡回で違反ゼロを確認済み。
+2. ~~`Content-Security-Policy-Report-Only` を `Content-Security-Policy` へ変更する~~ → 本適用済み。地図・QR・全画面の動作を強制CSP下で再確認済み。
+3. 将来インライン排除が完了したら `'unsafe-inline'` をnonce方式へ置換する(残タスク)。
 
 ### 3-3. 管理画面認証(P0)
 
@@ -265,7 +265,7 @@ Dockerベースイメージ(`node:lts-alpine`)のdigest更新もRenovateが追�
 | :--- | :--- | :--- |
 | Phase 0 | セキュリティヘッダー+CSP Report-Only、Renovate、CI品質ゲート、秘密情報スキャン(本書9章) | **実施済み** |
 | Phase 1(本番化着手時) | GitHubリポジトリ化(済:下記8-1)+ブランチ保護、Renovate App導入、CDN/TLS/WAF、自動デプロイ、管理画面認証(3-3)、サーバー永続化 | 一部実施 |
-| Phase 2(開催前) | 署名付きQR(3-4)、監査ログ(5-2)、プライバシーノーティス(4-3・実装済み。窓口記載のみ残)、CSP本適用、負荷・復旧試験 | 一部実施 |
+| Phase 2(開催前) | 署名付きQR(3-4)、監査ログ(5-2)、プライバシーノーティス(4-3・実装済み。窓口記載のみ残)、CSP本適用(実施済み)、負荷・復旧試験 | 一部実施 |
 | Phase 3(開催後) | 保持期間超過データの自動削除確認、インシデント振り返り、本書改訂 | 未着手 |
 
 ### 8-1. リポジトリ所有とクライアント引き渡し設計

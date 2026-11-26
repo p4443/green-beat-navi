@@ -18,8 +18,8 @@ const withSerwist = withSerwistInit({
   })),
 });
 
-// 段階導入中のCSP。まずReport-Onlyで互換性を確認し、問題がなければ
-// Content-Security-Policy へ昇格する(docs/SECURITY_AUTOMATION_SPEC.md 参照)
+// 本適用済みのCSP。全画面巡回で違反ゼロを確認済み(docs/SECURITY_AUTOMATION_SPEC.md 3-2)。
+// 外部接続先を追加する場合は img-src / connect-src に追記し、全画面で表示確認すること。
 const contentSecurityPolicy = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline'",
@@ -42,7 +42,7 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
   },
-  { key: "Content-Security-Policy-Report-Only", value: contentSecurityPolicy },
+  { key: "Content-Security-Policy", value: contentSecurityPolicy },
 ];
 
 const nextConfig: NextConfig = {
