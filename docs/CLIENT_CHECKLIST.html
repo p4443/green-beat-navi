@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>クライアント確認リスト | NAMÉGAWA GREEN BEAT 2027</title>
+<style>
+  @page { size: A4; margin: 14mm 14mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", "Yu Gothic", sans-serif;
+         color: #1a2b20; font-size: 10.5pt; line-height: 1.55; margin: 0; }
+  header.doc { border-bottom: 3px solid #092d20; padding-bottom: 8px; margin-bottom: 12px; }
+  header.doc h1 { font-size: 15pt; margin: 0 0 2px; color: #092d20; }
+  header.doc p.sub { margin: 0; font-size: 12pt; font-weight: 600; }
+  .meta { font-size: 8.5pt; color: #444; margin-top: 6px; }
+  .meta span { margin-right: 14px; }
+  .lead { background: #eef3ea; border-left: 4px solid #50723a; padding: 7px 10px; font-size: 9.5pt; margin: 10px 0 14px; }
+  h2 { font-size: 12pt; color: #092d20; border-left: 6px solid #50723a; padding-left: 8px; margin: 18px 0 8px; page-break-after: avoid; }
+  h3 { font-size: 10.5pt; margin: 12px 0 5px; page-break-after: avoid; }
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 10px; page-break-inside: avoid; }
+  th, td { border: 1px solid #9aa79a; padding: 4px 7px; text-align: left; vertical-align: top; font-size: 9.5pt; }
+  th { background: #e5ebe0; font-weight: 600; }
+  td.c, th.c { text-align: center; width: 36px; }
+  ul.check { list-style: none; padding-left: 2px; margin: 4px 0 10px; }
+  ul.check li { margin: 3px 0; padding-left: 1.6em; text-indent: -1.6em; }
+  ul.check li::before { content: "□ "; font-size: 11pt; }
+  .fill { color: #777; letter-spacing: 1px; }
+  footer { margin-top: 16px; font-size: 8.5pt; color: #666; text-align: center; border-top: 1px solid #ccc; padding-top: 6px; }
+  .pagebreak { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<header class="doc">
+  <h1>NAMÉGAWA GREEN BEAT 2027</h1>
+  <p class="sub">クライアント確認リスト</p>
+  <p class="meta">
+    <span>文書番号:GBN-CHK-001</span><span>版:1.0</span><span>作成日:2026年11月27日</span><span>宛先:主催・指定管理者 ご担当者様</span>
+  </p>
+  <p class="meta">関連文書:GBN-OPS-001(運営仕様)/ GBN-SEC-001(セキュリティ設計)/ GBN-DEP-001(デプロイ手順)/ GBN-CNT-001(編集ガイド)/ GBN-TST-001(試験報告)</p>
+</header>
+
+<p class="lead">本リストは、デモ確認の際にご覧いただく「完成済み機能」と、本番開催に向けて<strong>クライアント様にご確認・ご決定いただく事項</strong>をまとめたものです。各項目の□にチェックのうえ、末尾の確認欄にご記入ください。</p>
+
+<h2>1. 完成済み機能のご確認(デモにてご覧ください)</h2>
+
+<h3>来場者向け</h3>
+<ul class="check">
+  <li>ホーム/会場マップ(コース・スポット表示)/タイムテーブル/出店一覧</li>
+  <li>匿名参加(氏名・連絡先の入力なし)→ QRスタンプラリー → 達成クーポン表示</li>
+  <li>ホーム画面追加(アプリとして起動)・オフライン閲覧</li>
+  <li>プライバシーノーティス常設(個人情報を収集しない設計の明示)</li>
+</ul>
+
+<h3>運営向け</h3>
+<ul class="check">
+  <li>運営画面からの告知・遅延・中止・混雑の配信(全端末の来場者画面へ自動反映)</li>
+  <li>運営ログイン(個人アカウント・パスワードなし)と4段階の権限(全体管理/プログラム/出店/閲覧)</li>
+  <li>操作記録(誰が・いつ・何を)の自動保存</li>
+  <li>掲示用QRの一括表示・印刷</li>
+</ul>
+
+<h3>不正・安全対策</h3>
+<ul class="check">
+  <li>QRの偽造・複製対策(署名+当日限り有効。翌日は自動失効)</li>
+  <li>SNSでQRが共有されても、現地に行かないとスタンプが揃わない仕組み(現在地・順序・移動時間のチェック。位置情報は端末内のみで照合し送信しません)</li>
+  <li>通信・画面の保護(常時HTTPS・セキュリティヘッダー・CSP適用)</li>
+</ul>
+
+<h3>品質・運用(数値は GBN-TST-001)</h3>
+<ul class="check">
+  <li>アクセシビリティ自動監査:全10画面で違反ゼロ(WCAG AA 自動チェック)</li>
+  <li>負荷試験:同時接続 約3.4万人相当を処理(想定規模の十倍以上の余裕)・エラー0%</li>
+  <li>障害復旧:強制停止から約1秒で自動復旧</li>
+  <li>保守の無人化:プログラム部品の更新・安全検査・本番反映まで自動(人の作業は例外対応のみ)</li>
+</ul>
+
+<h2>2. ご確認・ご決定いただく事項</h2>
+
+<h3>A. イベント内容(確定後、設定ファイルの書き換えのみで反映できます)</h3>
+<table>
+  <tr><th style="width:34px">#</th><th style="width:220px">事項</th><th>決定内容の記入欄</th><th class="c">確認</th></tr>
+  <tr><td>A-1</td><td>開催日・開始/終了時刻</td><td class="fill">____________________</td><td class="c">□</td></tr>
+  <tr><td>A-2</td><td>スポットの実座標・コース(現地調査後)</td><td class="fill">調査予定日:__________</td><td class="c">□</td></tr>
+  <tr><td>A-3</td><td>出演者・プログラム(曲目・時刻)</td><td>別紙 □</td><td class="c">□</td></tr>
+  <tr><td>A-4</td><td>出店者・物販内容</td><td>別紙 □</td><td class="c">□</td></tr>
+  <tr><td>A-5</td><td>達成クーポンの特典内容・利用条件・協力店舗</td><td class="fill">____________________</td><td class="c">□</td></tr>
+  <tr><td>A-6</td><td>チェックポイントの数・場所(現行4地点)</td><td class="fill">____________________</td><td class="c">□</td></tr>
+</table>
+
+<h3>B. 公開・運用の準備(本番公開の前提)</h3>
+<table>
+  <tr><th style="width:34px">#</th><th style="width:220px">事項</th><th>内容</th><th class="c">確認</th></tr>
+  <tr><td>B-1</td><td>お問い合わせ窓口</td><td>プライバシーノーティスへ掲載する連絡先(メール等)</td><td class="c">□</td></tr>
+  <tr><td>B-2</td><td>プライバシーノーティス文面</td><td>法務・担当部署のご確認</td><td class="c">□</td></tr>
+  <tr><td>B-3</td><td>運営メンバーと権限</td><td>GitHubアカウント名×ロール(全体管理は2名以上)</td><td class="c">□</td></tr>
+  <tr><td>B-4</td><td>Google アカウント・請求先登録</td><td>Cloud Run 用(無料枠内の想定。予算アラート100円設定)</td><td class="c">□</td></tr>
+  <tr><td>B-5</td><td>本番ドメインの要否</td><td>取得する場合 年額 約1,200〜2,400円</td><td class="c">□</td></tr>
+  <tr><td>B-6</td><td>引き渡し先 GitHub Organization</td><td>作成タイミングのご相談(移管は約15分・無損失)</td><td class="c">□</td></tr>
+</table>
+
+<h3>C. アプリ外のご判断(GBN-OPS-001 9章)</h3>
+<table>
+  <tr><th style="width:34px">#</th><th>事項</th><th class="c">確認</th></tr>
+  <tr><td>C-1</td><td>許認可・施設利用条件・保険・警備</td><td class="c">□</td></tr>
+  <tr><td>C-2</td><td>雨天・暑熱・災害時の中止基準と連絡系統</td><td class="c">□</td></tr>
+  <tr><td>C-3</td><td>救護体制・当日の人員配置</td><td class="c">□</td></tr>
+</table>
+
+<h2>3. 費用のご確認</h2>
+<table>
+  <tr><th style="width:240px">項目</th><th style="width:150px">金額(目安)</th><th>備考</th></tr>
+  <tr><td>サーバー・配信・自動化 一式</td><td><strong>月額 0〜1,200円</strong></td><td>無料枠中心の構成(GBN-SEC-001 7章)</td></tr>
+  <tr><td>独自ドメイン(任意)</td><td>年額 1,200〜2,400円程度</td><td>B-5 を選択した場合</td></tr>
+  <tr><td>保守人件費</td><td>定常は自動化により不要</td><td>技術支援の関与条件は GBN-SEC-001 8-2章</td></tr>
+</table>
+<ul class="check"><li>上記の費用構成を確認しました</li></ul>
+
+<h2>4. 引き渡し・技術支援条件のご確認</h2>
+<ul class="check">
+  <li>引き渡しは GitHub の移管機能で行い、履歴・設定は無損失で引き継がれること(GBN-SEC-001 8-1)</li>
+  <li>当面は製作者が技術支援として関与し、責任分担・権限・対応水準・支援終了条件は GBN-SEC-001 8-2 のとおりであること</li>
+  <li>別イベントへの転用はテンプレート機能+設定ファイル書き換えで可能であること</li>
+</ul>
+
+<h2>5. 確認欄</h2>
+<table>
+  <tr><th style="width:160px">確認日</th><td class="fill">________年____月____日</td></tr>
+  <tr><th>貴団体名</th><td class="fill">________________________________</td></tr>
+  <tr><th>ご担当者(署名)</th><td class="fill">________________________________</td></tr>
+  <tr><th>連絡先</th><td class="fill">________________________________</td></tr>
+  <tr><th>特記事項</th><td class="fill">________________________________</td></tr>
+</table>
+
+<footer>GBN-CHK-001 v1.0 | GREEN BEAT NAVI — 音楽と緑で、まちを歩こう。</footer>
+
+</body>
+</html>
