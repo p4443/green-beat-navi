@@ -6,18 +6,17 @@ import { useSyncExternalStore } from "react";
 import { stampCheckpoints } from "@/data/engagement";
 import styles from "./qr-gallery.module.css";
 
-const stepLabels = [
-  "ここから参加開始",
-  "緑道を進んでチェックイン",
-  "南口で折り返し",
-  "北口に戻ってゴール",
-] as const;
-
 function subscribeToOrigin() {
   return () => undefined;
 }
 
-export function QrGallery({ baseUrl }: { baseUrl: string }) {
+export function QrGallery({
+  baseUrl,
+  tokens,
+}: {
+  baseUrl: string;
+  tokens?: Record<string, string>;
+}) {
   const currentOrigin = useSyncExternalStore(
     subscribeToOrigin,
     () => window.location.origin,
@@ -46,7 +45,7 @@ export function QrGallery({ baseUrl }: { baseUrl: string }) {
               <strong>{index + 1}</strong>
               <span>{index === 0 ? "START" : checkpoint.role}</span>
               <b>{checkpoint.name}</b>
-              <small>{stepLabels[index]}</small>
+              <small>{checkpoint.description}</small>
             </li>
           ))}
         </ol>
@@ -54,10 +53,11 @@ export function QrGallery({ baseUrl }: { baseUrl: string }) {
 
       <div className={styles.grid}>
         {stampCheckpoints.map((checkpoint, index) => {
+          const token = tokens?.[checkpoint.id];
           const url =
             index === 0
               ? `${currentOrigin}/join`
-              : `${currentOrigin}/checkin/${checkpoint.id}`;
+              : `${currentOrigin}/checkin/${checkpoint.id}${token ? `?t=${token}` : ""}`;
           const nextCheckpoint = stampCheckpoints[index + 1];
 
           return (
