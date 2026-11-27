@@ -10,6 +10,11 @@ import {
 } from "@/data/operations";
 import { scheduleItems } from "@/data/schedule";
 import { eventSpots } from "@/data/spots";
+import {
+  adminRoleLabels,
+  permissionsForRole,
+  type AdminSession,
+} from "@/lib/admin-session";
 import { useOperations } from "./operations-provider";
 import styles from "./admin-dashboard.module.css";
 
@@ -20,28 +25,59 @@ const kpis = [
   { label: "クーポン利用", value: "154", change: "48.4%" },
 ] as const;
 
-export function AdminDashboard() {
+export function AdminDashboard({
+  demoMode,
+  session,
+}: {
+  demoMode: boolean;
+  session: AdminSession | null;
+}) {
   const { state, dispatch, storageError } = useOperations();
   const [announcementLevel, setAnnouncementLevel] =
     useState<AnnouncementLevel>("info");
   const [announcementMessage, setAnnouncementMessage] = useState("");
+  // デモモード(認証未構成)では全操作可。認証時はロールに従う
+  const permissions = session
+    ? permissionsForRole(session.role)
+    : { announce: demoMode, program: demoMode, spots: demoMode, reset: demoMode };
 
   return (
     <main className={styles.page}>
       <header className={styles.header}>
         <div>
-          <span className={styles.eyebrow}>PRESENTATION DEMO</span>
+          <span className={styles.eyebrow}>
+            {demoMode ? "PRESENTATION DEMO" : "STAFF CONSOLE"}
+          </span>
           <h1>GREEN BEAT 運営コントロール</h1>
           <p>変更内容はこの端末の来場者画面へ即時反映されます。</p>
         </div>
-        <Link href="/" className={styles.publicLink}>
-          来場者画面を見る ↗
-        </Link>
+        <div className={styles.headerActions}>
+          {session && (
+            <form action="/api/admin/auth/logout" method="post">
+              <span className={styles.sessionBadge}>
+                {session.user}({adminRoleLabels[session.role]})
+              </span>
+              <button className={styles.logoutButton} type="submit">
+                ログアウト
+              </button>
+            </form>
+          )}
+          <Link href="/" className={styles.publicLink}>
+            来場者画面を見る ↗
+          </Link>
+        </div>
       </header>
 
-      <div className={styles.disclaimer}>
-        この画面はプレゼン用です。認証・クラウド保存・複数スタッフ権限は本番実装で追加します。
-      </div>
+      {demoMode ? (
+        <div className={styles.disclaimer}>
+          この画面はプレゼン用のデモモードです(認証未構成)。本番公開時は環境変数の設定で個人アカウント認証が有効になります。
+        </div>
+      ) : (
+        <div className={styles.disclaimer}>
+          ロール「{session ? adminRoleLabels[session.role] : ""}
+          」でログイン中。権限外の操作は無効化されています。
+        </div>
+      )}
 
       {storageError && (
         <div className={styles.error} role="alert">
@@ -76,7 +112,11 @@ export function AdminDashboard() {
           </div>
           <small>{state.announcement.active ? "配信中" : "停止中"}</small>
         </div>
-        <div className={styles.announcementForm}>
+        <fieldset
+          className={styles.rbacGroup}
+          disabled={!permissions.announce}
+        >
+          <div className={styles.announcementForm}>
           <label>
             種別
             <select
@@ -120,7 +160,8 @@ export function AdminDashboard() {
           >
             停止
           </button>
-        </div>
+          </div>
+        </fieldset>
       </section>
 
       <section className={styles.panel} aria-labelledby="schedule-admin-title">
@@ -130,7 +171,8 @@ export function AdminDashboard() {
             <h2 id="schedule-admin-title">タイムテーブル</h2>
           </div>
         </div>
-        <div className={styles.controlList}>
+        <fieldset className={styles.rbacGroup} disabled={!permissions.program}>
+          <div className={styles.controlList}>
           {scheduleItems.map((item) => {
             const operation = state.schedule[item.id];
 
@@ -186,7 +228,8 @@ export function AdminDashboard() {
               </article>
             );
           })}
-        </div>
+          </div>
+        </fieldset>
       </section>
 
       <section className={styles.panel} aria-labelledby="spot-admin-title">
@@ -196,7 +239,8 @@ export function AdminDashboard() {
             <h2 id="spot-admin-title">スポット状況</h2>
           </div>
         </div>
-        <div className={styles.controlList}>
+        <fieldset className={styles.rbacGroup} disabled={!permissions.spots}>
+          <div className={styles.controlList}>
           {eventSpots.map((spot) => {
             const operation = state.spots[spot.id];
 
@@ -243,7 +287,8 @@ export function AdminDashboard() {
               </article>
             );
           })}
-        </div>
+          </div>
+        </fieldset>
       </section>
 
       <footer className={styles.footer}>
@@ -256,6 +301,7 @@ export function AdminDashboard() {
         <button
           className={styles.resetButton}
           type="button"
+          disabled={!permissions.reset}
           onClick={() => dispatch({ type: "reset" })}
         >
           デモ状態をリセット

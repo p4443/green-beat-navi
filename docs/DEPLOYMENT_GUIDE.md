@@ -3,7 +3,7 @@
 ## Cloud Run による本番公開・無人自動デプロイ
 
 - 文書番号:GBN-DEP-001
-- 版:1.0
+- 版:1.1
 - 改訂日:2026年11月27日
 - 対象:技術支援・運営管理者
 - 関連文書:GBN-SEC-001(セキュリティ設計書)、GBN-CNT-001(コンテンツ編集ガイド)
@@ -110,11 +110,43 @@ GitHub (main) --push--> Cloud Build(自動ビルド) --> Cloud Run(東京) --> �
 
 ---
 
-## 6. セキュリティ上の注意(現段階)
+## 6. 管理画面認証の有効化(本番公開時は必須)
 
-- `/admin` は認証未実装(B-4で実装予定)ですが、運営状態は**操作者のブラウザ内(localStorage)にのみ保存**されるため、第三者が開いても他の来場者の画面には影響しません(デモ仕様)
-- サーバー永続化(B-3)を実装する際は、**必ず B-4(管理画面認証)を同時に有効化**してください(GBN-SEC-001 3-3)
-- シークレットを設定する場合は Cloud Run の「シークレット」機能を使用し、環境変数への直書きを避けてください
+環境変数を設定すると `/admin` に個人アカウント認証(GitHub OAuth+許可リスト)が有効になります。**未設定の間はデモモード(認証なし)**ですが、運営状態は操作者のブラウザ内(localStorage)にのみ保存されるため、第三者が開いても他の来場者の画面には影響しません。サーバー永続化(B-3)を導入する際は本章の認証有効化が**必須**です。
+
+### 6-1. GitHub OAuth App の作成(5分)
+
+1. <https://github.com/settings/developers> →「OAuth Apps」→「New OAuth App」
+2. 入力値:
+
+| 項目 | 値 |
+| :--- | :--- |
+| Application name | `GREEN BEAT NAVI Admin` |
+| Homepage URL | 公開URL(例 `https://green-beat-navi-xxxxx-an.a.run.app`) |
+| Authorization callback URL | `公開URL/api/admin/auth/callback` |
+
+3. 作成後、「Client ID」を控え、「Generate a new client secret」でシークレットを発行
+
+### 6-2. Cloud Run への環境変数設定
+
+「編集と新しいリビジョンのデプロイ」→「変数とシークレット」で以下を設定します。シークレット類は環境変数への直書きを避け、**Secret Manager 連携**を使用してください。
+
+| 変数 | 値 | 備考 |
+| :--- | :--- | :--- |
+| `AUTH_SECRET` | ランダム64文字(`openssl rand -hex 32` で生成) | **シークレット管理** |
+| `ADMIN_GITHUB_CLIENT_ID` | OAuth App の Client ID | |
+| `ADMIN_GITHUB_CLIENT_SECRET` | OAuth App の Client Secret | **シークレット管理** |
+| `ADMIN_USERS` | `p4443:admin,tanaka:program,sato:spots,suzuki` | GitHubユーザー名:ロール。ロール省略時は閲覧のみ |
+
+ロール:`admin`(全体管理)/`program`(プログラム担当)/`spots`(出店担当)/`viewer`(閲覧)— GBN-SEC-001 5-1 の権限マトリクスに対応。全体管理は2名以上に付与してください。
+
+### 6-3. 動作確認チェックリスト
+
+- [ ] `/admin` が「運営ログイン」画面になる(デモ画面が出ないこと)
+- [ ] 許可リストのアカウントでログインでき、ユーザー名とロールが表示される
+- [ ] 権限外のセクションが無効化(灰色)になる
+- [ ] 許可外アカウントは「権限がありません」で拒否される
+- [ ] Cloud Logging に `admin-audit` のログイン記録が残る
 
 ---
 
