@@ -13,7 +13,11 @@
     "courseDescription": "森林公園駅北口を出発し、森林公園南口ゲートで折り返して駅へ戻る約5.8kmの巡回コースです。",
     "couponCode": "GREENBEAT-2027",
     "eventStartsAt": null,
-    "eventEndsAt": null
+    "eventEndsAt": null,
+    "checkinGuard": {
+      "enabled": false,
+      "radiusMeters": 150
+    }
   },
   "eventSummary": {
     "dateLabel": "2027年 春／秋・調整中",
@@ -246,28 +250,40 @@
       "order": 1,
       "name": "森林公園駅 北口",
       "role": "START",
-      "description": "北口ロータリーからプロムナードへ出発"
+      "description": "北口ロータリーからプロムナードへ出発",
+      "latitude": 36.04607,
+      "longitude": 139.37421,
+      "minMinutesFromPrevious": 0
     },
     {
       "id": "greenway-cafe",
       "order": 2,
       "name": "GREENWAY CAFÉ",
       "role": "GREENWAY",
-      "description": "緑道の音楽と地域の味を体験"
+      "description": "緑道の音楽と地域の味を体験",
+      "latitude": 36.05334,
+      "longitude": 139.37486,
+      "minMinutesFromPrevious": 10
     },
     {
       "id": "south-gate-turn",
       "order": 3,
       "name": "森林公園 南口",
       "role": "TURN",
-      "description": "約2.9km地点で復路へ折り返し"
+      "description": "約2.9km地点で復路へ折り返し",
+      "latitude": 36.06814,
+      "longitude": 139.36303,
+      "minMinutesFromPrevious": 15
     },
     {
       "id": "station-goal",
       "order": 4,
       "name": "森林公園駅 北口",
       "role": "GOAL",
-      "description": "往復約5.8kmを歩いてゴール"
+      "description": "往復約5.8kmを歩いてゴール",
+      "latitude": 36.04607,
+      "longitude": 139.37421,
+      "minMinutesFromPrevious": 20
     }
   ]
 }

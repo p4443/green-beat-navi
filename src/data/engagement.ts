@@ -7,6 +7,8 @@ export type EngagementState = {
   participantId: string | null;
   participationStartedAt: string | null;
   stampIds: string[];
+  // 地点IDごとの取得時刻(ISO)。現地性ガードの移動時間チェックに使用する
+  stampTimes: Record<string, string>;
   favoriteProgramIds: string[];
   favoriteSpotIds: string[];
   notificationPreference: NotificationPreference;
@@ -18,7 +20,7 @@ export type EngagementAction =
       participantId: string;
       startedAt: string;
     }
-  | { type: "check_in"; checkpointId: string }
+  | { type: "check_in"; checkpointId: string; at?: string }
   | { type: "toggle_program_favorite"; id: string }
   | { type: "toggle_spot_favorite"; id: string }
   | {
@@ -36,6 +38,10 @@ export type StampCheckpoint = {
   name: string;
   role: string;
   description: string;
+  latitude: number;
+  longitude: number;
+  // 前の地点からの最短移動時間(分)。現地性ガードの高速連続取得検出に使用
+  minMinutesFromPrevious: number;
 };
 
 // スタンプ地点(QR連動)の編集は src/data/content.json で行う
@@ -49,6 +55,7 @@ export function createInitialEngagementState(): EngagementState {
     participantId: null,
     participationStartedAt: null,
     stampIds: [],
+    stampTimes: {},
     favoriteProgramIds: [],
     favoriteSpotIds: [],
     notificationPreference: "unknown",
@@ -78,6 +85,10 @@ export function engagementReducer(
         stampIds: state.stampIds.includes(stampCheckpoints[0].id)
           ? state.stampIds
           : [stampCheckpoints[0].id, ...state.stampIds],
+        stampTimes: {
+          [stampCheckpoints[0].id]: action.startedAt,
+          ...state.stampTimes,
+        },
       };
     case "check_in":
       if (
@@ -92,6 +103,10 @@ export function engagementReducer(
       return {
         ...state,
         stampIds: [...state.stampIds, action.checkpointId],
+        stampTimes: {
+          ...state.stampTimes,
+          [action.checkpointId]: action.at ?? new Date().toISOString(),
+        },
       };
     case "toggle_program_favorite":
       return {
@@ -128,6 +143,8 @@ export function isEngagementState(value: unknown): value is EngagementState {
     (candidate.participationStartedAt === null ||
       typeof candidate.participationStartedAt === "string") &&
     Array.isArray(candidate.stampIds) &&
+    typeof candidate.stampTimes === "object" &&
+    candidate.stampTimes !== null &&
     Array.isArray(candidate.favoriteProgramIds) &&
     Array.isArray(candidate.favoriteSpotIds) &&
     ["unknown", "enabled", "denied"].includes(
@@ -146,6 +163,16 @@ export function migrateEngagementState(value: unknown): EngagementState | null {
   }
 
   const candidate = value as Record<string, unknown>;
+
+  // v2(stampTimes導入前)からの移行: 取得時刻は不明のため空で引き継ぐ
+  if (
+    candidate.version === 2 &&
+    candidate.stampTimes === undefined &&
+    isEngagementState({ ...candidate, stampTimes: {} })
+  ) {
+    return { ...candidate, stampTimes: {} } as EngagementState;
+  }
+
   if (
     candidate.version !== 1 ||
     !Array.isArray(candidate.stampIds) ||
@@ -167,6 +194,7 @@ export function migrateEngagementState(value: unknown): EngagementState | null {
     stampIds: candidate.stampIds.filter(
       (value): value is string => typeof value === "string",
     ),
+    stampTimes: {},
     favoriteProgramIds: candidate.favoriteProgramIds.filter(
       (value): value is string => typeof value === "string",
     ),

@@ -54,6 +54,15 @@ export default function PrivacyPage() {
           </p>
         </section>
 
+        <h2 className={shell.sectionTitle}>位置情報について</h2>
+        <section className={shell.spotCard}>
+          <p>
+            スタンプの不正取得防止チェックが有効な場合のみ、チェックイン時に端末の位置情報を利用します。位置情報は
+            <strong>その場で端末内でのみ照合され、保存・送信は一切行いません</strong>
+            。位置情報を許可しない場合、スタンプの取得はできませんが、その他の機能はすべて利用できます。
+          </p>
+        </section>
+
         <h2 className={shell.sectionTitle}>お問い合わせ</h2>
         <section className={shell.spotCard}>
           <p>

@@ -58,6 +58,15 @@ describe("content.json: アプリ設定(app)", () => {
       ).toBe(true);
     }
   });
+
+  it("現地性ガード設定が妥当", () => {
+    expect(typeof appConfig.checkinGuard.enabled).toBe("boolean");
+    expect(
+      appConfig.checkinGuard.radiusMeters >= 30 &&
+        appConfig.checkinGuard.radiusMeters <= 5000,
+      "app.checkinGuard.radiusMeters は30〜5000(メートル)で入力してください",
+    ).toBe(true);
+  });
 });
 
 describe("content.json: 開催概要", () => {
@@ -183,6 +192,31 @@ describe("content.json: スタンプ地点(stampCheckpoints)", () => {
         `${checkpoint.id} の description`,
       ).not.toBe("");
     }
+  });
+
+  it("座標が日本国内で、最短移動時間が妥当(現地性ガード用)", () => {
+    stampCheckpoints.forEach((checkpoint, index) => {
+      expect(
+        isJapanLatitude(checkpoint.latitude),
+        `${checkpoint.id}: latitude(緯度)が不正です`,
+      ).toBe(true);
+      expect(
+        isJapanLongitude(checkpoint.longitude),
+        `${checkpoint.id}: longitude(経度)が不正です`,
+      ).toBe(true);
+      expect(
+        Number.isFinite(checkpoint.minMinutesFromPrevious) &&
+          checkpoint.minMinutesFromPrevious >= 0 &&
+          checkpoint.minMinutesFromPrevious <= 180,
+        `${checkpoint.id}: minMinutesFromPrevious は0〜180の分数で入力してください`,
+      ).toBe(true);
+      if (index === 0) {
+        expect(
+          checkpoint.minMinutesFromPrevious,
+          "先頭(スタート)地点の minMinutesFromPrevious は 0 にしてください",
+        ).toBe(0);
+      }
+    });
   });
 });
 

@@ -75,3 +75,19 @@
   background: #e8ede2;
   font-size: 12px;
 }
+
+/* --- 現地性ガード(B-2) --- */
+.guardNote {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.guardError {
+  margin: 0;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.6rem;
+  background: #fdecea;
+  color: #8a1f11;
+  font-size: 0.9rem;
+}

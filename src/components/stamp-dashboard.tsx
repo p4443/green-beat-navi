@@ -82,18 +82,24 @@ export function StampDashboard() {
               <small>{checkpoint.role}</small>
               <h2>{checkpoint.name}</h2>
               <p>{checkpoint.description}</p>
-              <button
-                type="button"
-                disabled={collected}
-                onClick={() =>
-                  dispatch({
-                    type: "check_in",
-                    checkpointId: checkpoint.id,
-                  })
-                }
-              >
-                {collected ? "取得済み" : "デモチェックイン"}
-              </button>
+              {appConfig.checkinGuard.enabled ? (
+                <span className={styles.guardHint}>
+                  {collected ? "取得済み" : "現地のQRで取得"}
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  disabled={collected}
+                  onClick={() =>
+                    dispatch({
+                      type: "check_in",
+                      checkpointId: checkpoint.id,
+                    })
+                  }
+                >
+                  {collected ? "取得済み" : "デモチェックイン"}
+                </button>
+              )}
             </article>
           );
         })}
