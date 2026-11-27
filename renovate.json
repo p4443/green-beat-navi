@@ -17,8 +17,7 @@
   "vulnerabilityAlerts": {
     "enabled": true,
     "automerge": true,
-    "schedule": ["at any time"],
-    "prPriority": 10
+    "schedule": ["at any time"]
   },
   "osvVulnerabilityAlerts": true,
   "packageRules": [
@@ -44,5 +43,5 @@
   ],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 0,
-  "dependencyDashboard": true
+  "dependencyDashboard": { "enabled": true }
 }
