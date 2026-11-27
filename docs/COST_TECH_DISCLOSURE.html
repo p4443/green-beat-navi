@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>制作費用・技術仕様 開示資料 | NAMÉGAWA GREEN BEAT 2027</title>
+<style>
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", "Yu Gothic", sans-serif;
+         color: #1a2b20; font-size: 10pt; line-height: 1.55; margin: 0; }
+  header.doc { border-bottom: 3px solid #092d20; padding-bottom: 8px; margin-bottom: 10px; }
+  header.doc h1 { font-size: 15pt; margin: 0 0 2px; color: #092d20; }
+  header.doc p.sub { margin: 0; font-size: 12pt; font-weight: 600; }
+  .meta { font-size: 8.5pt; color: #444; margin-top: 6px; }
+  .meta span { margin-right: 14px; }
+  h2 { font-size: 12pt; color: #092d20; border-left: 6px solid #50723a; padding-left: 8px; margin: 16px 0 7px; page-break-after: avoid; }
+  h3 { font-size: 10.5pt; margin: 10px 0 5px; page-break-after: avoid; }
+  p { margin: 5px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 10px; page-break-inside: avoid; }
+  th, td { border: 1px solid #9aa79a; padding: 4px 7px; text-align: left; vertical-align: top; font-size: 9pt; }
+  th { background: #e5ebe0; font-weight: 600; }
+  .note { background: #eef3ea; border-left: 4px solid #50723a; padding: 6px 10px; font-size: 9pt; margin: 8px 0; }
+  .ai { background: #eaf0f6; border-left: 4px solid #2b4a6f; padding: 7px 10px; font-size: 9.5pt; margin: 8px 0; }
+  ol.src { font-size: 8.5pt; color: #333; margin: 4px 0 0 1.4em; padding: 0; }
+  footer { margin-top: 14px; font-size: 8.5pt; color: #666; text-align: center; border-top: 1px solid #ccc; padding-top: 6px; }
+  .fill { color: #777; }
+  strong.big { font-size: 10.5pt; }
+</style>
+</head>
+<body>
+
+<header class="doc">
+  <h1>NAMÉGAWA GREEN BEAT 2027</h1>
+  <p class="sub">制作費用・技術仕様 開示資料</p>
+  <p class="meta">
+    <span>文書番号:GBN-INF-001</span><span>版:1.0</span><span>作成日:2026年11月27日</span><span>市場調査日:2026年11月27日</span><span>宛先:主催・指定管理者 ご担当者様</span>
+  </p>
+</header>
+
+<h2>1. 制作体制の開示(AI 共同制作について)</h2>
+<p class="ai">本アプリは、<strong>製作者(人間)と GitHub Copilot(生成 AI によるコーディング支援)との共同制作</strong>です。透明性のため、役割分担と品質担保の方法を開示します。</p>
+<table>
+  <tr><th style="width:150px">担当</th><th>役割</th></tr>
+  <tr><td>製作者(人間)</td><td>要件の決定、方針の承認、AI 成果物の確認、クライアント対応、最終責任</td></tr>
+  <tr><td>GitHub Copilot(AI)</td><td>設計・プログラム実装・テスト作成・文書作成の実務支援</td></tr>
+</table>
+<p><strong>品質の担保方法</strong>:AI の成果物は「動けばよし」とせず、①自動テスト 63 件 ②型検査・構文検査 ③実機ブラウザでの動作実証 ④GitHub 上の自動検査(脆弱性・秘密情報混入)⑤人間による承認、の多重チェックを全変更に適用しています(検証記録:GBN-TST-001)。</p>
+<p><strong>AI 活用の効果</strong>:通常 3〜5 ヶ月を要する規模の開発(2 章参照)を短期間・低コストで実現しました。使用技術はすべて公開されたオープンソースであり、AI 固有の権利問題が生じない構成です。</p>
+
+<h2>2. 市場調査:同種アプリの制作費用相場</h2>
+<p>デジタルスタンプラリー/イベントアプリの公開相場(調査日時点・出典は 4 章)。</p>
+<table>
+  <tr><th>方式</th><th style="width:95px">初期費用</th><th style="width:85px">月額</th><th style="width:70px">期間</th><th>本アプリとの比較</th></tr>
+  <tr><td>既存 SaaS をそのまま利用</td><td>5〜40万円</td><td>1〜3万円</td><td>2週間〜</td><td>機能限定(デザイン・独自機能・データ主権なし)</td></tr>
+  <tr><td>既存 SaaS のカスタマイズ</td><td>100〜300万円</td><td>3〜10万円</td><td>1〜3ヶ月</td><td>ベンダーロックインあり</td></tr>
+  <tr><td><strong>独自アプリ新規開発(本アプリ相当)</strong></td><td><strong>200〜500万円</strong></td><td>保守3〜15万円</td><td>3〜5ヶ月</td><td>地図・GPS認証・QR・管理画面・権限・複数端末同期を含む構成が本区分に該当</td></tr>
+  <tr><td>大規模フルスクラッチ</td><td>400〜1,000万円超</td><td>10〜30万円</td><td>6ヶ月〜</td><td>—</td></tr>
+</table>
+<p class="note">参考:技術者の人月単価相場は 60〜160 万円。本アプリ相当を 3 名×3 ヶ月で開発した場合、人件費だけで 270〜500 万円超との試算が公開されています。</p>
+
+<h3>本プロジェクトの費用</h3>
+<table>
+  <tr><th style="width:150px">項目</th><th>本プロジェクト</th><th style="width:120px">市場相場</th><th style="width:150px">差</th></tr>
+  <tr><td>制作費</td><td>別途お見積り(記入欄:<span class="fill">____________</span>円)</td><td>200〜500万円</td><td>AI 活用により大幅圧縮</td></tr>
+  <tr><td>運用費(サーバー等)</td><td><strong class="big">月額 0〜1,200円</strong></td><td>月額1〜30万円</td><td><strong>年間 約12〜360万円の削減</strong></td></tr>
+  <tr><td>保守人件費</td><td>定常は自動化により不要</td><td>月額3〜15万円</td><td><strong>年間 36〜180万円の削減</strong></td></tr>
+  <tr><td>別イベント転用</td><td>設定書き換えのみ(追加開発費ほぼゼロ)</td><td>都度 初期費用が発生</td><td>—</td></tr>
+</table>
+
+<h2>3. 使用技術の仕様リスト(わかりやすい説明付き)</h2>
+<p><strong>すべて無料のオープンソース技術</strong>で構成されており、ライセンス費用ゼロ・特定業者への依存(ロックイン)がありません。</p>
+<table>
+  <tr><th style="width:90px">区分</th><th style="width:160px">採用技術</th><th>はたらき(平易な説明)</th><th style="width:60px">費用</th></tr>
+  <tr><td>プログラム言語</td><td>TypeScript</td><td>JavaScript に「型」の安全性を足した言語。書き間違いを自動検出できる</td><td>無料</td></tr>
+  <tr><td>画面の基盤</td><td>Next.js 16 / React 19</td><td>世界で最も広く使われる Web アプリの土台。表示が速く、スマホ最適</td><td>無料</td></tr>
+  <tr><td>アプリ化</td><td>PWA(Serwist)</td><td>ブラウザから「ホーム画面に追加」でアプリとして起動。オフラインでも閲覧可</td><td>無料</td></tr>
+  <tr><td>地図</td><td>MapLibre + OpenStreetMap</td><td>無料のオープン地図。Google マップのような地図使用料が不要</td><td>無料</td></tr>
+  <tr><td>QRコード</td><td>react-qr-code + 独自署名</td><td>掲示用 QR の生成。偽造防止の電子署名と当日期限は独自実装</td><td>無料</td></tr>
+  <tr><td>認証</td><td>GitHub OAuth(独自実装)</td><td>運営ログイン。パスワードを作らず個人アカウントで安全に入る</td><td>無料</td></tr>
+  <tr><td>データ保存</td><td>Cloud Firestore</td><td>運営情報の保存と全端末同期(本番時)。来場者の個人情報は保存しない</td><td>無料枠内</td></tr>
+  <tr><td>実行環境</td><td>Docker / Node.js / Cloud Run</td><td>どのサーバーでも同じに動く「コンテナ」方式。利用した分だけ課金(待機中 0 円)</td><td>無料枠内</td></tr>
+  <tr><td>品質検査</td><td>Vitest / axe-core / autocannon</td><td>自動テスト 63 件・アクセシビリティ監査・負荷試験</td><td>無料</td></tr>
+  <tr><td>自動運用</td><td>GitHub Actions / Renovate</td><td>プログラム部品の更新→安全検査→本番反映まで無人で実行</td><td>無料</td></tr>
+</table>
+
+<h3>規模・品質の実測値</h3>
+<table>
+  <tr><th style="width:150px">指標</th><th>実測</th></tr>
+  <tr><td>プログラム規模</td><td>約6,600行(本体4,500行+デザイン2,100行)・画面10面・ファイル66点</td></tr>
+  <tr><td>自動テスト</td><td>63件(全合格)</td></tr>
+  <tr><td>文書</td><td>仕様書・手順書など8冊(本書含む)</td></tr>
+  <tr><td>アクセシビリティ</td><td>全10画面で違反ゼロ(WCAG AA 自動監査)</td></tr>
+  <tr><td>処理能力</td><td>同時接続 約3.4万人相当(実測)・エラー0%</td></tr>
+  <tr><td>障害復旧</td><td>強制停止から約1秒で自動復旧</td></tr>
+</table>
+
+<h2>4. 出典(市場調査)</h2>
+<ol class="src">
+  <li>株式会社ペンタゴン「スタンプラリーアプリの開発にかかる費用・期間は?」(pentagon.tokyo)</li>
+  <li>株式会社ripla「スタンプラリーアプリ開発の見積相場や費用について」(ripla.co.jp)</li>
+  <li>株式会社キャンバス「デジタルスタンプラリー費用と導入事例【2026】」(canvas-works.jp)</li>
+  <li>furari「デジタルスタンプラリーの費用を徹底解説【2026年版】」(furari.jp)</li>
+</ol>
+<p class="note">相場は各社公開情報に基づく目安であり、要件により変動します。</p>
+
+<footer>GBN-INF-001 v1.0 | 本資料は GitHub Copilot との共同制作により作成されました | GREEN BEAT NAVI — 音楽と緑で、まちを歩こう。</footer>
+
+</body>
+</html>
