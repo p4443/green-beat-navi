@@ -45,6 +45,7 @@ docker run --rm -v "$PWD":/app -w /app node:lts-alpine npm run build
 - [操作マニュアル](./docs/USER_MANUAL.md)(GBN-MAN-001)
 - [セキュリティ・個人情報管理・無人自動更新 設計書](./docs/SECURITY_AUTOMATION_SPEC.md)(GBN-SEC-001)
 - [コンテンツ編集ガイド](./docs/CONTENT_GUIDE.md)(GBN-CNT-001)
+- [デプロイ手順書(Cloud Run)](./docs/DEPLOYMENT_GUIDE.md)(GBN-DEP-001)
 
 ## Gitフック(GitKraken対応の自動チェック)
 

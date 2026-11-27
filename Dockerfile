@@ -13,8 +13,13 @@ FROM node:lts-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+# Cloud Run は PORT 環境変数を注入する。standalone サーバーは PORT/HOSTNAME を参照する
+ENV HOSTNAME=0.0.0.0
+ENV PORT=3000
+COPY --from=builder --chown=node:node /app/public ./public
+COPY --from=builder --chown=node:node /app/.next/standalone ./
+COPY --from=builder --chown=node:node /app/.next/static ./.next/static
+# セキュリティ強化: 非rootユーザーで実行(GBN-SEC-001 3章)
+USER node
 EXPOSE 3000
 CMD ["node", "server.js"]
