@@ -123,7 +123,7 @@
 .time small {
   display: block;
   margin-top: 5px;
-  color: #778177;
+  color: #6d766d;
   font-size: 11px;
   font-weight: 500;
 }
@@ -204,7 +204,7 @@
   padding: 6px 9px;
   border: 1px solid #cbd4c4;
   border-radius: 99px;
-  color: #52753c;
+  color: #50723a;
   background: #fff;
   cursor: pointer;
   font-size: 15px;

@@ -68,7 +68,7 @@
 }
 
 .joinPrompt span {
-  color: #52753c;
+  color: #50723a;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -82,7 +82,7 @@
 
 .joinPrompt p {
   margin-top: 10px;
-  color: #687269;
+  color: #616b62;
   line-height: 1.7;
 }
 
@@ -101,7 +101,7 @@
 
 .participantId {
   margin-top: 18px;
-  color: #687269;
+  color: #616b62;
   font-size: 12px;
   text-align: right;
 }
@@ -157,13 +157,13 @@
 
 .collected .stampMark {
   border-style: solid;
-  border-color: #52753c;
+  border-color: #50723a;
   color: #fff;
   background: #52753c;
 }
 
 .stampGrid small {
-  color: #52753c;
+  color: #50723a;
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -246,7 +246,7 @@
 }
 
 .notification span {
-  color: #52753c;
+  color: #50723a;
 }
 
 .notification h2 {

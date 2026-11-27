@@ -17,7 +17,7 @@
 }
 
 .card > span {
-  color: #52753c;
+  color: #50723a;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -32,7 +32,7 @@
 
 .lead {
   margin-top: 16px;
-  color: #687269;
+  color: #616b62;
   line-height: 1.8;
 }
 
@@ -54,7 +54,7 @@
 }
 
 .summary dt {
-  color: #718074;
+  color: #657368;
   font-size: 10px;
   font-weight: 800;
 }
@@ -140,7 +140,7 @@
 }
 
 .confirmation > span {
-  color: #52753c;
+  color: #50723a;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.13em;
@@ -153,7 +153,7 @@
 
 .confirmation > p {
   margin-top: 8px;
-  color: #687269;
+  color: #616b62;
   font-size: 13px;
   line-height: 1.7;
 }
@@ -163,7 +163,7 @@
   margin-top: 10px;
   padding: 10px;
   border: 0;
-  color: #52753c;
+  color: #50723a;
   background: transparent;
   cursor: pointer;
   font-weight: 800;
@@ -172,7 +172,7 @@
 .secondaryLink {
   margin-top: 14px;
   display: block;
-  color: #52753c;
+  color: #50723a;
   font-size: 12px;
   font-weight: 800;
   text-align: center;
@@ -188,7 +188,7 @@
 
 .idLabel {
   margin-top: 24px;
-  color: #718074;
+  color: #657368;
   font-size: 11px;
   font-weight: 800;
 }

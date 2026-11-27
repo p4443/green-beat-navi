@@ -188,7 +188,7 @@
 }
 
 .organizer span {
-  color: #52753c;
+  color: #50723a;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -204,7 +204,7 @@
 }
 
 .sectionHeading p {
-  color: #52753c;
+  color: #50723a;
 }
 
 .sectionHeading h2 {
@@ -256,13 +256,13 @@
 
 .navCard small {
   margin-top: 7px;
-  color: #687269;
+  color: #616b62;
   line-height: 1.6;
 }
 
 .arrow {
   align-self: flex-end;
-  color: #52753c;
+  color: #50723a;
 }
 
 .programs {
@@ -285,7 +285,7 @@
 }
 
 .programNumber {
-  color: #879282;
+  color: #636c60;
   font-family: Georgia, serif;
   font-size: 15px;
 }
@@ -302,12 +302,12 @@
 
 .programTime span {
   margin-top: 6px;
-  color: #687269;
+  color: #616b62;
   font-size: 12px;
 }
 
 .category {
-  color: #52753c;
+  color: #50723a;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -324,14 +324,14 @@
 .programDetail p {
   max-width: 640px;
   margin-top: 8px;
-  color: #687269;
+  color: #616b62;
   font-size: 14px;
   line-height: 1.7;
 }
 
 .notice {
   margin-top: 24px;
-  color: #687269;
+  color: #616b62;
   font-size: 12px;
   line-height: 1.7;
 }
